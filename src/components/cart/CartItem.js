@@ -3,25 +3,26 @@ import PropTypes from "prop-types";
 import { Consumer } from "../../context";
 
 export class CartItem extends Component {
-  onDeleteCartItemClick = (id, dispatch) => {
+  onDeleteItemClick = (dispatch, id) => {
     dispatch({ type: "DELETE_CART_ITEM", payload: id });
-    console.log(id);
   };
   render() {
-    const { id, title, size, price } = this.props.cartItem;
     return (
       <Consumer>
         {(value) => {
+          const { title, price, size, id } = this.props.cartItem;
           const { dispatch } = value;
           return (
-            <div className="card bg-blue-600 mt-2 pl-3 pt-1 hover:bg-blue-800">
-              <i
-                className="float-right mt-1 m-2 fa fa-times hover: cursor-pointer"
-                onClick={this.onDeleteCartItemClick.bind(this, id, dispatch)}
-              ></i>
+            <div className="pl-3 pt-1  border-b-2 border-blue-600 hover:bg-blue-600 hover:text-white">
               <h5 className="capitalize">{title}</h5>
-              <h5>{size}</h5>
-              <h5>{price}</h5>
+              <i
+                className="group-hover:visible float-right pr-1 pt-2 fa fa-times hover:text-red-600 hover: cursor-pointer"
+                onClick={this.onDeleteItemClick.bind(this, dispatch, id)}
+              ></i>
+              <div className="pb-2 pt-1 flex">
+                <h5 className="">{size}</h5>
+                <h5 className="ml-10">{price}</h5>
+              </div>
             </div>
           );
         }}
@@ -29,9 +30,7 @@ export class CartItem extends Component {
     );
   }
 }
-
 CartItem.propTypes = {
-  CartItem: PropTypes.object.isRequired,
+  cartItem: PropTypes.object.isRequired,
 };
-
 export default CartItem;

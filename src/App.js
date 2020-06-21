@@ -1,21 +1,19 @@
 import React, { Component } from "react";
-import Movies from "./components/movies/Movies";
 import Sidebar from "./components/layout/Sidebar";
-
-import { Provider } from "./context";
-import "./tailwind.generated.css";
-import "font-awesome/css/font-awesome.css";
+import MovieCollection from "./components/movies/MovieCollection";
+import Provider from "./context";
 
 class App extends Component {
   render() {
     return (
       <Provider>
         <div className="App">
-          <div className="container float-left">
+          <div className="thebg fixed bg-fixed top-0 left-0  w-full h-full bg-cover"></div>
+          <div className=" z-40 md:h-10 ">
             <Sidebar />
           </div>
-          <div className="container float-right">
-            <Movies />
+          <div className="z-20 pt-16 md:pt-0 self-center pr-2 md:ml-64">
+            <MovieCollection />
           </div>
         </div>
       </Provider>
