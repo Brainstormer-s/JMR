@@ -13,12 +13,12 @@ export class Cart extends Component {
           const { cart, dispatch } = value;
           return (
             <React.Fragment>
-              <h2 className="text-2xl mt-32 text-center mb-4 text-white font-mediume">
+              <h2 className="text-4xl text-center mb-20 text-white font-large">
                 Cart
               </h2>
               <div
                 className="bg-white p-1 text-black w-full overflow-y-auto scrolling-auto"
-                style={{ height: "53%" }}
+                style={{ height: "72%" }}
               >
                 {cart.map((cartItem) => (
                   <CartItem key={cartItem.id} cartItem={cartItem} />
@@ -26,7 +26,7 @@ export class Cart extends Component {
               </div>
               <div className="flex ">
                 <button
-                  className="hover-red mb-3 mt-3 ml-1 h-8 text-white pl-12 pr-8 w-auto border-2 rounded-bl-full hover:border-transparent cursor-pointer"
+                  className="hover-red mb-3 mt-3 ml-0 h-8 text-white pl-12 pr-8 w-auto border-2 rounded-bl-full hover:border-transparent cursor-pointer"
                   onClick={this.onClearCartClick.bind(this, dispatch)}
                 >
                   Clear

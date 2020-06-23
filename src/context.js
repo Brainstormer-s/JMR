@@ -4,6 +4,13 @@ const Context = React.createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "MARGIN_SIDEBAR":
+      return {
+        ...state,
+        marginOfSidebar: action.payload
+          ? state.marginOfSidebarState.marginOff
+          : state.marginOfSidebarState.marginOn,
+      };
     case "CLEAR_CART":
       return {
         ...state,
@@ -15,11 +22,13 @@ const reducer = (state, action) => {
         cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
       };
     case "ADD_TO_CART":
+      if (state.cart.find((cartItem) => cartItem.id === action.payload)) {
+        return state;
+      }
       return {
         ...state,
         cart: [
           ...state.cart,
-          //state.movieCollection.foreach((movie) => movie.id === action.payload),
           state.movieCollection.find((movie) => movie.id === action.payload),
         ],
       };
@@ -30,8 +39,13 @@ const reducer = (state, action) => {
 
 export default class Provider extends Component {
   state = {
-    cart: [],
     dispatch: (action) => this.setState((state) => reducer(state, action)),
+    marginOfSidebarState: {
+      marginOn: "z-20 pt-16 md:pt-0 self-center pr-2 md:ml-64",
+      marginOff: "z-20 pt-16 md:pt-0 self-center pr-2",
+    },
+    marginOfSidebar: "z-20 pt-16 md:pt-0 self-center pr-2 md:ml-64",
+    cart: [],
     movieCollection: [
       {
         id: 1,
